@@ -131,13 +131,23 @@
  *  @param view 支持alert的视图控件
  */
 - (void) calculateListViewLocation:(UIView *)view{
+    
     /**
      *  选中视图的当前的frame；
      */
     CGRect rect = view.frame;
     
     int height = [UIScreen mainScreen].bounds.size.height;
-    int origin_y = rect.origin.y + rect.size.height;
+    int origin_y;
+    
+    
+    UIScrollView * scrollview = [self viewController:view];
+    if (scrollview) {
+        origin_y = rect.origin.y + rect.size.height - scrollview.contentOffset.y;
+    }else{
+        origin_y = rect.origin.y + rect.size.height;
+    }
+    
     CGFloat location = origin_y % height;
     
     /**
@@ -148,27 +158,27 @@
     
     CGRect listViewFrame;
     
-    if(location + self.EC_height < SCREEN_HEIGHT){
+    if(location + self.EC_height + 108 < SCREEN_HEIGHT){
         /**
          *  箭头方向朝上
          */
         if (rect.origin.x + SCREEN_WIDTH * 0.5 < SCREEN_WIDTH) {
-            arrowFrame = CGRectMake(rect.origin.x + 10, origin_y, 20, 20);
-            listViewFrame = CGRectMake(rect.origin.x, origin_y + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+            arrowFrame = CGRectMake(rect.origin.x + 10, location, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x, location + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionLeftTop;
         }else{
-            arrowFrame = CGRectMake(rect.origin.x + view.frame.size.width - 30, origin_y, 20, 20);
-            listViewFrame = CGRectMake(rect.origin.x + rect.size.width - SCREEN_WIDTH * 0.5, origin_y + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+            arrowFrame = CGRectMake(rect.origin.x + view.frame.size.width - 30, location, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x + rect.size.width - SCREEN_WIDTH * 0.5, location + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionRightTop;
         }
     }else {     //箭头方向朝下
         if (rect.origin.x + SCREEN_WIDTH * 0.5 < SCREEN_WIDTH) {
-            arrowFrame = CGRectMake(rect.origin.x + 10, rect.origin.y - 20, 20, 20);
-            listViewFrame = CGRectMake(rect.origin.x, rect.origin.y - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+            arrowFrame = CGRectMake(rect.origin.x + 10, location - rect.size.height - 20, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x, location - rect.size.height - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionLeftBottom;
         }else{
-            arrowFrame = CGRectMake(rect.origin.x + view.frame.size.width- 30, rect.origin.y - 20, 20, 20);
-            listViewFrame = CGRectMake(rect.origin.x + view.frame.size.width - SCREEN_WIDTH * 0.5, rect.origin.y - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+            arrowFrame = CGRectMake(rect.origin.x + view.frame.size.width- 30, location - rect.size.height - 20, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x + view.frame.size.width - SCREEN_WIDTH * 0.5, location - rect.size.height - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionRightBottom;
         }
     }
@@ -301,7 +311,15 @@
     [self removeFromSuperview];
 }
 
-
+- (UIScrollView *)viewController:(UIView *) view {
+    for (UIView* next = [view superview]; next; next = next.superview) {
+        UIResponder* nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIScrollView class]] || [nextResponder isKindOfClass:[UITableView class]] || [nextResponder isKindOfClass:[UICollectionView class]]) {
+            return (UIScrollView *)nextResponder;
+        }
+    }
+    return nil;
+}
 
 
 

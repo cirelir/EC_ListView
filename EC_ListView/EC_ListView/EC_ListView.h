@@ -30,5 +30,7 @@ typedef enum : NSUInteger {
 
 -(instancetype) initWithSuperControl:(id)itemControl  andItemTitles:(NSArray *)itemTitles   andItemImages:(NSArray *)itemImages;
 
+-(void) listViewShow;
+
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5694AD341D62ED1700191F2F /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5694AD331D62ED1700191F2F /* NextViewController.m */; };
 		56B048331D616390002F935F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B048321D616390002F935F /* main.m */; };
 		56B048361D616390002F935F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B048351D616390002F935F /* AppDelegate.m */; };
 		56B048391D616390002F935F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B048381D616390002F935F /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5694AD321D62ED1700191F2F /* NextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewController.h; sourceTree = "<group>"; };
+		5694AD331D62ED1700191F2F /* NextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
 		56B0482E1D616390002F935F /* EC_ListView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EC_ListView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B048321D616390002F935F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		56B048341D616390002F935F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 				56B048351D616390002F935F /* AppDelegate.m */,
 				56B048371D616390002F935F /* ViewController.h */,
 				56B048381D616390002F935F /* ViewController.m */,
+				5694AD321D62ED1700191F2F /* NextViewController.h */,
+				5694AD331D62ED1700191F2F /* NextViewController.m */,
 				56B0484B1D61645E002F935F /* EC_ListView */,
 				56B0483A1D616390002F935F /* Main.storyboard */,
 				56B0483D1D616390002F935F /* Assets.xcassets */,
@@ -162,6 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5694AD341D62ED1700191F2F /* NextViewController.m in Sources */,
 				56B048391D616390002F935F /* ViewController.m in Sources */,
 				56B048361D616390002F935F /* AppDelegate.m in Sources */,
 				56B0484A1D61645A002F935F /* EC_ListView.m in Sources */,
@@ -316,6 +322,7 @@
 				56B048471D616390002F935F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

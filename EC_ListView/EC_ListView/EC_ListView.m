@@ -131,9 +131,13 @@
  *  @param view 支持alert的视图控件
  */
 - (void) calculateListViewLocation:(UIView *)view{
-    CGPoint rect = view.center;
+    /**
+     *  选中视图的当前的frame；
+     */
+    CGRect rect = view.frame;
+    
     int height = [UIScreen mainScreen].bounds.size.height;
-    int origin_y = rect.y + view.frame.size.height / 2;
+    int origin_y = rect.origin.y + rect.size.height;
     CGFloat location = origin_y % height;
     
     /**
@@ -148,27 +152,26 @@
         /**
          *  箭头方向朝上
          */
-        if (rect.x - view.frame.size.width /2 + SCREEN_WIDTH * 0.5 < SCREEN_WIDTH) {
-            arrowFrame = CGRectMake(rect.x - view.frame.size.width /2 + 10, origin_y, 20, 20);
-            listViewFrame = CGRectMake(rect.x - view.frame.size.width /2, origin_y + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+        if (rect.origin.x + SCREEN_WIDTH * 0.5 < SCREEN_WIDTH) {
+            arrowFrame = CGRectMake(rect.origin.x + 10, origin_y, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x, origin_y + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionLeftTop;
         }else{
-            arrowFrame = CGRectMake(rect.x + view.frame.size.width /2 - 30, origin_y, 20, 20);
-            listViewFrame = CGRectMake(rect.x + view.frame.size.width /2 - SCREEN_WIDTH * 0.5, origin_y + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+            arrowFrame = CGRectMake(rect.origin.x + view.frame.size.width - 30, origin_y, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x + rect.size.width - SCREEN_WIDTH * 0.5, origin_y + 20, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionRightTop;
         }
     }else {     //箭头方向朝下
-        if (rect.x - view.frame.size.width /2 + SCREEN_WIDTH * 0.5 < SCREEN_WIDTH) {
-            arrowFrame = CGRectMake(rect.x - view.frame.size.width /2 + 10, rect.y - view.frame.size.height/2 - 20, 20, 20);
-            listViewFrame = CGRectMake(rect.x - view.frame.size.width /2, rect.y - view.frame.size.height/2 - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+        if (rect.origin.x + SCREEN_WIDTH * 0.5 < SCREEN_WIDTH) {
+            arrowFrame = CGRectMake(rect.origin.x + 10, rect.origin.y - 20, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x, rect.origin.y - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionLeftBottom;
         }else{
-            arrowFrame = CGRectMake(rect.x + view.frame.size.width /2 - 30, rect.y - view.frame.size.height/2 - 20, 20, 20);
-            listViewFrame = CGRectMake(rect.x + view.frame.size.width /2 - SCREEN_WIDTH * 0.5, rect.y - view.frame.size.height/2 - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
+            arrowFrame = CGRectMake(rect.origin.x + view.frame.size.width- 30, rect.origin.y - 20, 20, 20);
+            listViewFrame = CGRectMake(rect.origin.x + view.frame.size.width - SCREEN_WIDTH * 0.5, rect.origin.y - self.EC_height, SCREEN_WIDTH * 0.5, self.EC_height - 20);
             self.EC_Direction = EC_ListViewDirectionRightBottom;
         }
     }
-    
     [self setNeedsDisplay];
     [self setTableViewWithFame:listViewFrame];
 }
